@@ -1,0 +1,58 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <h:outputStylesheet library="css" name="stylesNoTables.css"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">     
+                <h:body class="content">
+                    <h:form class="myForm"
+                            id="showGuestForm">
+                        <div class="centreLabels">
+
+                        </div>
+                        <h:panelGrid columns="2"
+                                     id="guestCheckOutDetails"
+                                     columnClasses="firstBold, second"
+                                     class="content">
+                            <h:outputLabel value="First Name:">
+                            </h:outputLabel>
+                            <h:inputText value="#{manageBackpacker.firstName}"
+                                         disabled="true"
+                                         class="rateTextBox">
+                            </h:inputText>
+                            <h:outputLabel value="Last Name:">
+                            </h:outputLabel>
+                            <h:inputText value="#{manageBackpacker.lastName}"
+                                         disabled="true"
+                                         class="rateTextBox">
+                            </h:inputText>
+                            <h:commandButton action="#{manageBackpacker.confirmDeleteGuest}" 
+                                             id="confirmDeleteTheGuest"
+                                             value="Confirm Delete" 
+                                             class="confirmDeleteButton">
+                            </h:commandButton>
+                            <h:commandButton action="#{navigationBean.redirectToIndex}"
+                                             id="cancelButton"
+                                             value="Cancel" 
+                                             class="confirmDeleteButton">
+                            </h:commandButton>
+                        </h:panelGrid>
+                    </h:form>                 
+                </h:body> 
+            </div>
+        </div>
+    </div>
+</html>
+

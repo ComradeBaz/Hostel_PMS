@@ -1,0 +1,699 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30-Oct-2018, 19:41:46
+    Author     : ComradeBaz
+*/
+@import url('https://fonts.googleapis.com/css?family=Annie Use Your Telescope');
+html { overflow-y: scroll; overflow-x:hidden; }
+
+.content {
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+.subtotalContent {
+    width: 312px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+.contentPendingCheckins {
+    text-align: left;
+    max-width: 900px;
+    margin: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    border: 1px;
+    border-color: black;
+    align-content: center;
+}
+.forHeadingWidth{
+    align-content: center;
+    width: 100%;
+}
+table, tr, th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
+td {
+    padding: 1px 5px;
+}
+table {
+    border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+    background-color: #d2dfb9;
+}
+tr:nth-child(odd) {
+    background-color: #dde7cb;
+}
+th {
+    background-color: #d2dfb9;
+}
+.buttons {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    position: relative;
+    left: 50%; /* the left edge of the button is now in the center of the parent element. Now we need to nudge the button back to the left by 50% of the button width to make it center aligned. */
+    margin-left: -100px;
+}
+.buttonsPendingCheckIns {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+
+    /* the left edge of the button is now in the center of the parent element. Now we need to nudge the button back to the left by 50% of the button width to make it center aligned. */
+
+}
+.buttonsInline {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    /* the left edge of the button is now in the center of the parent element. Now we need to nudge the button back to the left by 50% of the button width to make it center aligned. */
+}
+.buttons:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.buttonsInline:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.buttonsGridViewTable {
+    margin: 5px;
+    width: 150px;
+    background-color: #426B69;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Annie Use Your Telescope';
+    font-size: inherit;
+}
+
+.buttonsGridViewTable:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.buttonConfirmation {
+    width: 150px;
+    background-color: #426B69;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Annie Use Your Telescope';
+    font-size: inherit;
+    position: static;
+}
+.buttonConfirmation:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.myEditButtons {
+    width: 16px;
+    height: 16px;
+    padding: 0px;
+}
+.myEditButtons:hover {
+    background: url("images/editGuestButtonHover.png");
+}
+.bankDepositButton {
+    width: fit-content;
+    height: 25px;
+    padding: 1px;
+    margin-left: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: 0px;
+    color: white;
+    background-color: #426B69;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 2px;
+    border-style: solid;
+}
+.bankDepositButton:hover {
+    background-color: #2A4849;
+}
+.myGridEditButtons {
+    width: 16px;
+    height: 16px;
+    padding: 0px;
+}
+.myGridEditButtons:hover {
+    background: url("images/editGuestButtonGridTableHover.png");
+}
+.gridButtons {
+    padding: 0px;
+    margin: 0px;
+}
+.gridGoButton {
+    background-color: #3d548f;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    width: fit-content;
+    height: 30px;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: white;
+}
+.gridGoButton:hover {
+    background-color: #172036;
+}
+.gridHomeButton {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 2px;
+}
+.gridHomeButton:hover {
+    background-color: #2A4849;
+}
+.searchButton {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 2px;
+}
+.searchButton:hover {
+    background-color: #2A4849;
+}
+.editGuestPageButtons {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 2px;
+    position: relative;
+    left: 0px;
+}
+.editGuestPageButtons:hover {
+    background-color: #2A4849;
+}
+.extendCheckoutButton {
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 6px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-width: 1px;
+    font-size: 12px;
+}
+.buttonsCheckInTwo {
+    width: 120px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: inherit;
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    position: relative;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.buttonsCheckInTwo:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.first {
+    width: 150px;
+    text-align: justify;
+}
+.firstpopup {
+    width: 110px;
+    text-align: justify;
+}
+.firstSearch {
+    background-color: #d2dfb9;
+    text-align: justify;
+}
+.second {
+    width: 150px;
+    text-align: justify;
+    padding: 2px;
+}
+.secondShowGuest {
+    width: 150px;
+    text-align: right;
+}
+.third {
+    width: 150px;
+    text-align: justify;
+}
+.fourth {
+    width: 150px;
+    text-align: justify;
+}
+.fourthExtrasTable {
+    width: 60px;
+    text-align: justify;
+}
+.extraTableFitContent {
+    width: fit-content;
+}
+.fifth {
+    width: 150px;
+    text-align: justify;
+}
+.firstBold {
+    width: 150px;
+    text-align: justify;
+    font-weight: bold !important;
+}
+.firstBoldPayBill {
+    width: 150px;
+    border-left: 2px;
+    text-align: justify;
+    font-weight: bold !important;
+    padding: 2px;
+}
+
+.facets {
+    width: 150px;
+    border-width: 4px;
+}
+.labelHeading {
+    font-family: 'Annie Use Your Telescope';
+    font-size: 26px;
+    font-weight: bold;
+}
+.labels { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+}
+.searchLabel {
+    margin: 4px;
+}
+.myForm {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #c6d7a8;
+    padding: 20px;
+    width: 95%;
+    align-content: center;
+    box-shadow:         inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.payBillForm {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #c6d7a8;
+    padding: 10px;
+    width: 100%;
+    align-content: center;
+    box-shadow:         inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.myFormGridTableHeading {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #c6d7a8;
+    padding: 20px;
+    width: 95%;
+    align-content: center;
+    box-shadow:         inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.tableForm {
+    border-top: 0px;
+}
+.myFormForGridViewRoomSelect {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #c6d7a8;
+    padding: 20px;
+    width: 250px;
+    align-content: center;
+    box-shadow:         inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-left: auto;
+    margin-right: auto;
+}
+.myFormPopUp {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    border-radius: 4px;
+    width: 450px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #426B69;
+    color: white;
+    text-align: center;
+    align-content: center;
+    border-radius: 4px;
+    padding: 1px;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 24px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 1s;
+    animation-name: animatetop;
+    animation-duration: 1s;
+}
+.popUpUpdatedGuest {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 4px;
+    width: 360px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #426B69;
+    color: white;
+    text-align: center;
+    align-content: center;
+    border-radius: 4px;
+    padding: 1px;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 24px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 1s;
+    animation-name: animatetop;
+    animation-duration: 1s
+}
+.myThreeColumnForm {
+    align-items: center;
+    border-width: 4px;
+    border-color: black;
+    background-color: #dde7cb;
+    padding: 10px;
+    width: 95%;
+    box-shadow:         inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+table.gridViewGuestPopUp {
+    font-family: 'Annie Use Your Telescope';
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-size: 20px;
+}
+table.gridViewGuestPopUp tr, table.gridViewGuestPopUp th, table.gridViewGuestPopUp td {
+    text-align: left;
+    background-color: #2A4849;
+}
+table.greenTable {
+    font-family: 'Annie Use Your Telescope';
+    border: 2px solid #00131a;
+    width:100%;
+    text-align: center;
+    align-content: center;
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+table.greenTable td, table.greenTable th {
+    border: 1px solid #426B69;
+    padding: 5px;
+}
+table.greenTable tbody td {
+    font-size: 22px;
+    padding: 5px;
+}
+table.greenTable thead {
+    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    /*background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);*/
+    border-bottom: 0px solid #444444;
+}
+table.greenTable thead th {
+    font-size: 19px;
+    font-weight: bold;
+    text-align: left;
+    border-left: 1px solid #00131a;
+    border-bottom: 1px solid #00131a;
+}
+table.greenTable thead th:first-child {
+    border-left: none;
+}
+.tableCellClass {
+    padding: 5px 7px;
+    align-content: center;
+    font-size: 0px;
+    box-shadow:
+        inset 0 0 2px 0 rgba(255,255,255,.4),
+        inset 0 0 2px 0 rgba(0,0,0,.4),
+        inset 0 0 3px 5px rgba(0,0,0,.05),
+        2px 2px 2px 0 rgba(0,0,0,.25);
+}
+table.gridViewTable {   
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    width: 100%;
+}
+table.gridViewTable tbody tr td:first-child {
+    font-weight:  bold;
+    font-size: 24px;
+    box-shadow:
+        inset 0 0 2px 0 rgba(255,255,255,.4),
+        inset 0 0 2px 0 rgba(0,0,0,.4),
+        inset 0 0 3px 5px rgba(0,0,0,.05),
+        2px 2px 2px 0 rgba(0,0,0,.25);
+}
+table.availability {
+    font-family: 'Annie Use Your Telescope';
+    border: 2px solid #00131a;
+    width:100%;
+    text-align: left;
+    align-content: center;
+
+    margin-top: 0px;
+    margin-bottom: 2px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.ui-datatable.gridTable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th {
+    padding: 0px;
+    overflow: hidden;
+    border-width: 1px;
+    border-style: solid;
+}
+.myGridTableHeading {
+    width: 100%;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    background-color: #426B69;
+    color: white;
+    align-content: center;
+}
+.myGridTableHeadingLeftAlign {
+    width: 250px;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: left;
+    background-color: #426B69;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #c9cae8;
+    box-shadow:         inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    align-content: center;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+    align-content: center;
+    width: 100%;
+}
+.middleShowCheckedOutGuest {
+    position: fixed;
+    top: 20px;
+    display: table-cell;
+    vertical-align: middle;
+    align-content: center;
+    width: 100%;
+}
+/* inner used on the Index page to keep the display narrow */
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+.innerIndex {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+.innerTwo {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+.innerThree {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+.innerThreeDeleteRoom {
+    margin-left: auto;
+    margin-right: auto;
+    width:fit-content;
+}
+/* This resizes the text size in the calendar textBoxes */
+input[type=text] {
+    font-size: inherit;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    font-size: 15px;
+    width: 40px;
+    background-color: #426B69;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 1px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -24px;
+    right: 55%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+a:link {
+    color: #000000;
+}
+a:hover {
+    color: #333333;
+}
+.payBillContentHeader {
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 0px;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+
+.close-button-top-right {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 12px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    position: absolute;
+    right: 19px;
+    top: 3px;
+    margin:0px 1px;
+}
+
+.close-button-top-right:hover {
+    color: white;
+    background-color: #2A4849;
+}

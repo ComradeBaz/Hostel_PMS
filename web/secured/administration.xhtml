@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="adminPage.css"/>
+        <h:outputScript library="js" name="clearTextBoxes.js" />
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body onload="clearTextBoxSettings()"
+            class="content">
+        <div class="outer">
+            <div class="middle">
+                <div class="settingsInnerThree">
+                    <div>
+                        <h:form>
+                            <h:commandButton class="settingsHomeButton"
+                                             action="#{navigationBean.toIndex}"
+                                             value="Home">
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                    <div class="settingsContent">
+                        <div class="newRoomHeader">
+                            Add Room
+                        </div>
+                        <h:form class="mySettingsForm"
+                                prependId="false">
+                            <h:message id="messageOne"
+                                       for="roomName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageTwo"
+                                       for="noOfBeds"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageThree"
+                                       for="rate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:panelGrid columns="2"
+                                         columnClasses="rightAlign,leftAlign"
+                                         class="content">
+                                <h:outputLabel for="roomName" 
+                                               value="Room Name" 
+                                               class="adminLabels">
+                                </h:outputLabel>
+                                <h:inputText id="roomName"
+                                             readonly="false"
+                                             label="Room Name"
+                                             tabindex="1"
+                                             required="true"
+                                             requiredMessage="Room Name is required "
+                                             value="#{manageRooms.roomName}"
+                                             class="adminTextBoxes">
+                                    <f:validator validatorId="wordValidator"/>
+                                </h:inputText>
+                                <h:outputLabel for="noOfBeds" 
+                                               value="Number of Beds " 
+                                               class="adminLabels">
+                                </h:outputLabel>
+                                <h:inputText id="noOfBeds"
+                                             readonly="false"
+                                             label="Number of Beds"
+                                             tabindex="2"
+                                             required="true"
+                                             requiredMessage="Number of beds is required "
+                                             value="#{manageRooms.numberOfBeds}"
+                                             class="adminTextBoxes">
+                                    <f:validator validatorId="numberValidator"/>
+                                </h:inputText>
+                                <h:outputLabel value="Rate per Night " 
+                                               class="adminLabels">
+                                </h:outputLabel>
+                                <h:inputText id="rate"
+                                             readonly="false"
+                                             label="Rate per Night"
+                                             tabindex="3"
+                                             required="true"
+                                             requiredMessage="Rate per Night is required"
+                                             value="#{manageRooms.rate}"
+                                             class="adminTextBoxes">
+                                    <f:validator validatorId="numberValidator"/>
+                                </h:inputText>
+                                <h:commandButton action="#{manageRooms.addRoom()}" 
+                                                 tabindex="4"
+                                                 value="Add Room" 
+                                                 class="settingsButtons">
+                                </h:commandButton>               
+
+                            </h:panelGrid>
+                        </h:form>
+                        <div class="newRoomHeader">
+                            Delete Room
+                        </div>
+                        <h:form class="mySettingsForm"
+                                prependId="false">
+                            <div class="content">
+                                <h:selectOneMenu id="roomNameDelete" 
+                                                 tabindex="5"
+                                                 value="#{manageRooms.roomName}"
+                                                 class="buttonsGridViewTable">
+                                    <f:selectItem itemLabel="(RoomName)" itemValue="">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.hostelRooms}">
+                                    </f:selectItems>
+                                </h:selectOneMenu>
+                                <h:commandButton action="#{manageRooms.deleteRoom()}" 
+                                                 tabindex="6"
+                                                 value="Delete Room" 
+                                                 class="buttonsGridViewTable">
+                                </h:commandButton>
+                            </div>
+                        </h:form>
+                        <div class="newRoomHeader">
+                            Update Room
+                        </div>
+                        <h:form class="mySettingsForm"
+                                prependId="false">
+                            <h:message id="messageEight"
+                                       for="settingsName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageNine"
+                                       for="conversionRate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:panelGrid columns="2"
+                                         columnClasses="rightAlign,leftAlign"
+                                         class="content">
+                                <h:outputLabel value="Room Name"
+                                               for="settingsName"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:selectOneMenu id="allRooms" 
+                                                 tabindex="15"
+                                                 value="#{manageRooms.roomName}"
+                                                 class="buttonsGridViewTable">
+                                    <f:selectItem itemLabel="(Roomname)" 
+                                                  itemValue="">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.hostelRooms}">
+                                    </f:selectItems>
+                                    <f:ajax event="change" 
+                                            execute="@this" 
+                                            render="newRoomRate newNumberOfBeds"
+                                            listener="#{manageRooms.roomChangeListener}"/>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Number of Beds"
+                                               for="newNumberOfBeds"
+                                               class="labels">   
+                                </h:outputLabel>
+                                <h:inputText value="#{manageRooms.numberOfBeds}"
+                                             id="newNumberOfBeds"
+                                             class="adminTextBoxes"
+                                             tabindex="16"
+                                             required="true"
+                                             requiredMessage="Number of Beds is required">
+                                    <f:validator validatorId="numberValidator"/>
+                                    <f:convertNumber maxFractionDigits="0"/>
+                                </h:inputText>
+                                <h:outputLabel value="Rate"
+                                               for="newRoomRate"
+                                               class="labels">   
+                                </h:outputLabel>
+                                <h:inputText value="#{manageRooms.rate}"
+                                             id="newRoomRate"
+                                             class="adminTextBoxes"
+                                             tabindex="16"
+                                             required="true"
+                                             requiredMessage="New Rate is required">
+                                    <f:validator validatorId="numberValidator"/>
+                                    <f:convertNumber pattern="#0.00"/>
+                                </h:inputText>
+                                <h:commandButton action="#{manageRooms.updateRoom()}"
+                                                 class="settingsButtons"
+                                                 tabindex="17"
+                                                 value="Update Room">
+                                </h:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+
+                    </div>
+                    <div class="settingsContentRight">
+                        <div class="newRoomHeader">
+                            Add Currency
+                        </div>
+                        <h:form class="mySettingsForm"
+                                prependId="false">
+                            <h:message id="messageFour"
+                                       for="settingsName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageFive"
+                                       for="conversionRate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:panelGrid columns="2"
+                                         columnClasses="rightAlign,leftAlign"
+                                         class="content">
+                                <h:outputLabel value="Currency"
+                                               for="settingsName"
+                                               class="labels">
+                                </h:outputLabel>
+
+                                <h:selectOneMenu id="settingsName"  
+                                                 tabindex="11"
+                                                 value="#{settings.name}"
+                                                 class="buttonsGridViewTable"
+                                                 required="true"
+                                                 requiredMessage="Name is required ">
+                                    <f:validator validatorId="wordValidator"/>
+                                    <f:selectItem itemLabel="(Please Select)" 
+                                                  itemValue="">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.allCurrencies}">
+                                    </f:selectItems>
+                                    <f:ajax event="change"
+                                            execute="@this"/>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Rate"
+                                               for="conversionRate"
+                                               class="labels">   
+                                </h:outputLabel>
+                                <h:inputText value="#{settings.conversionRate}"
+                                             id="conversionRate"
+                                             class="adminTextBoxes"
+                                             tabindex="12"
+                                             required="true"
+                                             requiredMessage="Conversion Rate is required">
+                                    <f:validator validatorId="numberValidator"/>
+                                </h:inputText>
+                                <h:outputLabel value="Set Default"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:selectOneMenu id="defaultCurrency"  
+                                                 tabindex="13"
+                                                 value="#{staticData.defaultCurrency}"
+                                                 class="buttonsGridViewTable">
+                                    <f:selectItem itemLabel="#{staticData.defaultCurrency}" 
+                                                  itemValue="#{staticData.defaultCurrency}">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.currencies}">
+                                    </f:selectItems>
+                                    <f:ajax event="change"
+                                            execute="@this"/>
+                                </h:selectOneMenu>
+                                <h:commandButton action="#{settings.addCurrency()}"
+                                                 tabindex="14"
+                                                 class="settingsButtons"
+                                                 value="Add Currency">
+                                </h:commandButton>
+
+                            </h:panelGrid>
+                        </h:form>
+                        <div class="newRoomHeader">
+                            Update Currency
+                        </div>
+                        <h:form class="mySettingsForm"
+                                prependId="false">
+                            <h:message id="messageSix"
+                                       for="settingsName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageSeven"
+                                       for="conversionRate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:panelGrid columns="2"
+                                         columnClasses="rightAlign,leftAlign"
+                                         class="content">
+                                <h:outputLabel value="Currency"
+                                               for="settingsName"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:selectOneMenu id="allCurrencies" 
+                                                 tabindex="15"
+                                                 value="#{settings.name}"
+                                                 class="buttonsGridViewTable">
+                                    <f:selectItem itemLabel="#{staticData.defaultCurrency}" 
+                                                  itemValue="#{staticData.defaultCurrency}">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.currencies}">
+                                    </f:selectItems>
+                                    <f:ajax event="change"
+                                            execute="@this"/>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Rate"
+                                               for="conversionRate"
+                                               class="labels">   
+                                </h:outputLabel>
+                                <h:inputText value="#{settings.conversionRate}"
+                                             id="newConversionRate"
+                                             class="adminTextBoxes"
+                                             tabindex="16"
+                                             required="true"
+                                             requiredMessage="Conversion Rate is required">
+                                    <f:validator validatorId="numberValidator"/>
+                                </h:inputText>
+
+                                <h:commandButton action="#{settings.updateCurrency()}"
+                                                 class="settingsButtons"
+                                                 tabindex="17"
+                                                 value="Update Currency">
+                                </h:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+                        <div class="newRoomHeader">
+                            Add Extra
+                        </div>
+                        <h:form class="mySettingsForm"
+                                prependId="false">
+                            <h:panelGrid columns="2"
+                                         columnClasses="rightAligh, leftAlign"
+                                         class="content">
+                                <h:outputLabel for="extraItem" 
+                                               value="Name"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:inputText id="extraItem"
+                                             label="Name"
+                                             value="#{addExtra.extraName}"
+                                             class="adminTextBoxes"
+                                             tabindex="7"
+                                             required="true"
+                                             requiredMessage="Name is required ">
+                                    <f:validator validatorId="stringValidator"/>
+                                </h:inputText>
+
+                                <h:outputLabel for="extraAmount" 
+                                               value="Amount"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:inputText id="extraAmount"
+                                             label="Amount"
+                                             value="#{addExtra.extraAmount}"
+                                             class="adminTextBoxes"
+                                             tabindex="8"
+                                             required="true"
+                                             requiredMessage="Amount is required">
+                                    <f:validator validatorId="numberValidator"/>
+                                    <f:convertNumber maxFractionDigits="0"/>
+                                </h:inputText>
+                                <h:outputLabel for="depositCheckBox" 
+                                               value="Is this a Deposit? "
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:selectBooleanCheckbox value="#{addExtra.isDeposit}" 
+                                                         class="depositCheckBox"
+                                                         id="depositCheckBox"
+                                                         tabindex="9"/> 
+                                <h:commandButton action="#{addExtra.addExtraItem()}" 
+                                                 tabindex="10"
+                                                 value="Add Item" 
+                                                 class="settingsButtons">
+                                </h:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

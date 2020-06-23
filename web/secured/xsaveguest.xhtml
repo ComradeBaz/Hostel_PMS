@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="stylesNoTables.css"/>
+        <h:outputScript library="js" name="clearTextBoxes.js" />
+        <title>Hostel PMS</title>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerThree">
+                <div class="content">
+                    <h:body class="content"
+                            onload="clearTextBoxSaveGuest()">
+                        <h:form id="guestdetails"
+                                class="myForm"
+                                prependId="false">
+                            <h:message id="messageOne"
+                                       for="firstName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageTwo"
+                                       for="lastName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageThree"
+                                       for="idNumber"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageFour"
+                                       for="country"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:panelGrid columns="2"
+                                         columnClasses="rightAlign,leftAlign"
+                                         class="content">
+                                <h:outputLabel for="firstName" 
+                                               value="First Name:"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:inputText id="firstName"
+                                             label="First Name"
+                                             value="#{manageBackpacker.firstName}"
+                                             required="true"
+                                             requiredMessage="First Name is required "
+                                             class="labels">
+                                    <f:validator validatorId="stringValidator"/>
+                                </h:inputText>
+                                <h:outputLabel for="lastName" 
+                                               value="Last Name:"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:inputText id="lastName"
+                                             label="Last Name"
+                                             value="#{manageBackpacker.lastName}"
+                                             required="true"
+                                             requiredMessage="Last Name is required"
+                                             class="labels">
+                                    <f:validator validatorId="stringValidator"/>
+                                </h:inputText>
+                                <h:outputLabel for="idNumber" 
+                                               value="ID Number:"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:inputText id="idNumber"
+                                             label="ID Number"
+                                             value="#{manageBackpacker.idNumber}"
+                                             required="false"
+                                             class="labels">
+                                    <f:validator validatorId="idValidator"/>
+                                </h:inputText>
+                                <h:outputLabel for="country" 
+                                               value="Country:"
+                                               class="labels">
+                                </h:outputLabel>
+                                <h:inputText id="country"
+                                             label="Country"
+                                             value="#{manageBackpacker.country}"
+                                             required="false"
+                                             class="labels">
+                                    <f:validator validatorId="wordValidator"/>
+                                </h:inputText>
+                            </h:panelGrid>
+                            <h:panelGrid columns="3"
+                                         columnClasses="rightAlign,leftAlign"
+                                         class="content">
+                                <h:commandButton class="buttonsInline"
+                                                 action="#{manageBackpacker.saveGuest}" 
+                                                 value="Save">
+                                </h:commandButton>
+                                <h:commandButton class="buttonsInline"
+                                                 action="#{manageBackpacker.doCheckIn}" 
+                                                 value="Check-In">
+                                </h:commandButton>
+                                <h:commandButton class="buttonsInline"
+                                                 action="#{navigationBean.redirectToIndex}" 
+                                                 value="Home">
+                                    <f:ajax execute="@this"/>
+                                </h:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
+

@@ -1,0 +1,74 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="stylesNoTables.css"/>
+        <h:outputScript library="js" name="clearTextBoxes.js" />
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">     
+                <h:body class="content"
+                        onload="clearTextBoxSignUp()">
+                    <h:form class="myForm"
+                            prependId="false">
+                        <h:message id="messageTwo"
+                                   for="email"
+                                   style="color:red">                                              
+                        </h:message>
+                        <div class="centreLabels">
+                            Sign-Up
+                        </div>
+                        <h:panelGrid columns="2"
+                                     id="guestCheckOutDetails"
+
+                                     class="content">
+                            <h:outputLabel value="email-address"
+                                           class="labelsSignup">
+                            </h:outputLabel>
+                            <h:inputText id="email"
+                                         label="email"
+                                         value="#{signUp.emailAddress}"
+                                         required="true"
+                                         requiredMessage="Username is required "
+                                         class="signUpUsername">
+                                <f:validator validatorId="nameValidator"/>
+                            </h:inputText>
+
+
+                            <h:outputLabel value="Password"
+                                           class="labelsSignup">
+                            </h:outputLabel>
+                            <h:inputSecret id="password"
+                                           label="Password"
+                                           value="#{signUp.password}"
+                                           required="true"
+                                           requiredMessage="Password is required"
+                                           class="signUpUsername">
+                            </h:inputSecret>
+                        </h:panelGrid>
+                        <div class="centreLabels">
+                            <h:commandButton value="OK"
+                                             action="#{signUp.doSignUp}"
+                                             class="confirmDeleteButton">
+                            </h:commandButton>
+                            <h:commandButton value="Cancel"
+                                             immediate="true"
+                                             action="#{navigationBean.toLogin}"
+                                             class="confirmDeleteButton">
+                            </h:commandButton>
+                        </div>
+                    </h:form>                   
+                </h:body> 
+            </div>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <h:outputScript library="js" name="myJQuery.js" />
+        <h:outputScript library="js" name="getTableCellValues.js" />
+        <h:outputScript library="js" name="manageGridView.js" />
+        <h:outputScript library="js" name="dateHelper.js" />
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerTwo">
+                <div class="content">
+                    <h:body class="content"
+                            onload="waitABit()">
+                        <div id="thePage"
+                             style="display:none;">
+                            <h:form class="myForm">
+                                <h:commandButton class="gridHomeButton"
+                                                 action="#{navigationBean.toIndex}"
+                                                 value="Home">
+                                </h:commandButton>
+                                <h:commandButton value="CheckOuts"
+                                                 class="gridHomeButton"
+                                                 action="wguestscheckingouttoday">
+                                </h:commandButton>
+                                <div class="myGridTableHeading">
+                                    <h:outputLabel value="Availability" class="labelHeading">
+                                    </h:outputLabel>
+                                </div>
+                                <h:dataTable value="#{dynamicData.availability}" 
+                                             var="results"
+                                             styleClass="availability"
+                                             columnClasses="first,second, third">
+                                    <h:column>
+                                        <f:facet name="header">Room</f:facet>
+                                        <h:commandLink action="wthegrid"
+                                                       id="thisMonthButton"
+                                                       onclick="setWhatMonth(this)"
+                                                       value="#{results.roomName}"
+                                                       actionListener="#{manageRoomGrid.setTheRoom}">
+                                            <f:param name="roomName" value="#{results.roomName}"/>
+                                            <f:param name="forPeriod" value="this_month"/>
+                                        </h:commandLink>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Today</f:facet>
+                                            #{results.availableToday}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Tomorrow</f:facet>
+                                            #{results.availableTomorrow}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Next Month</f:facet>
+                                        <h:commandLink action="wthegrid"
+                                                       id="nextMonthButton"
+                                                       value="Go To Next Month"
+                                                       onclick="setWhatMonth(this)"
+                                                       actionListener="#{manageRoomGrid.setTheRoom}">
+                                            <f:param name="roomName" value="#{results.roomName}"/>
+                                            <f:param name="forPeriod" value="next_month"/>
+                                        </h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+                                #{dynamicData.totalOccupancy} guests checked in.                          
+                            </h:form>
+                        </div>
+                        <script>
+                            function waitABit() {
+                                var myVar;
+                                myVar = setTimeout(showPage, 200);
+                            }
+                            function showPage() {
+
+                                document.getElementById("thePage").style.display = "block";
+                            }
+                        </script>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

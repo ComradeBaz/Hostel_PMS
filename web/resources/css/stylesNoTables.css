@@ -1,0 +1,376 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30-Oct-2018, 19:41:46
+    Author     : ComradeBaz
+*/
+@import url('https://fonts.googleapis.com/css?family=Annie Use Your Telescope');
+.content {
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+
+.settingsBackground {
+    width: fit-content;
+
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+    background-color: BLUE;
+    border-style: solid;
+    border-color: red;
+}
+
+.settingsContent {
+    max-width: 50%;
+    float: left;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+.settingsContentRight {
+    max-width: 50%;
+    float: left;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+    margin-left: 15px;
+}
+.contentPendingCheckins {
+    text-align: left;
+    max-width: 900px;
+    margin: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    border: 1px;
+    border-color: black;
+    align-content: center;
+}
+.buttons {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    position: relative;
+    left: 50%; /* the left edge of the button is now in the center of the parent element. Now we need to nudge the button back to the left by 50% of the button width to make it center aligned. */
+    margin-left: -100px;
+}
+.settingsButtons {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 2px;
+}
+.settingsHomeButton {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+.buttonsPendingCheckIns {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* Change button when hover */
+    transition-duration: 0.4s;
+}
+.buttonsInline {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    /* the left edge of the button is now in the center of the parent element. Now we need to nudge the button back to the left by 50% of the button width to make it center aligned. */
+
+}
+.buttons:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.buttonsInline:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.buttonsGridViewTable {
+    width: 150px;
+    background-color: #426B69;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Annie Use Your Telescope';
+    font-size: inherit;
+}
+.confirmDeleteButton {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 2px;
+    width: 150px;
+}
+.confirmDeleteButton:hover {
+    background-color: #2A4849;
+}
+.boldLabel {
+    margin-right: 5px;
+}
+.centreLabels {
+    text-align: center;
+}
+.centreLabelsLogin {
+    text-align: center;
+    margin: 5px;
+}
+.first {
+    width: 150px;
+    text-align: justify;
+}
+.firstLogin {
+    width: 200px;
+    text-align: right;
+}
+.second {
+    width: 150px;
+    text-align: justify;
+}
+.third {
+    width: 150px;
+    text-align: justify;
+}
+.fourth {
+    width: 150px;
+    text-align: justify;
+}
+.fifth {
+    width: 150px;
+    text-align: justify;
+}
+.firstBold {
+    width: 150px;
+    text-align: justify;
+    font-weight: bold;
+}
+.second {
+    width: 150px;
+    text-align: justify;
+}
+.facets {
+    width: 150px;
+    border-width: 4px;
+}
+.labelHeading {
+    font-family: 'Annie Use Your Telescope';
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%;
+}
+.labels { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 190px;
+}
+.adminTextBoxes { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 150px;
+}
+.adminLabels {
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 100%;
+}
+.signUpUsername { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 190px;
+}
+td {
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 110px;
+}
+.labelsSignup { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 100px;
+}
+.rateTextBox {
+    width: 150px;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    border-style: solid;
+    color: black;  
+    text-align: left;
+    font-family: 'Annie Use Your Telescope';
+    padding-left: 3px;
+    font-size: 22px;
+}
+.myForm {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #c6d7a8;
+    padding: 20px;
+    width: 95%;
+    align-content: center;
+}
+.mySettingsForm {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #d1dfb9;
+    padding: 20px;
+    align-content: center;
+    border-collapse: collapse;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.myThreeColumnForm {
+    align-items: center;
+    border-width: 4px;
+    border-color: black;
+    background-color: #dde7cb;
+    padding: 10px;
+    width: 95%;
+}
+.newRoomHeader {
+    margin-left: 20px;
+    align-content: center;
+}
+table.greenTable {
+    font-family: 'Annie Use Your Telescope';
+    border: 2px solid #00131a;
+    width:95%;
+    text-align: center;
+    align-content: center;
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+table.greenTable td, table.greenTable th {
+    border: 1px solid #426B69;
+    padding: 5px;
+}
+table.greenTable tbody td {
+    font-size: 22px;
+    padding: 5px;
+}
+table.greenTable thead {
+    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    /*background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);*/
+    border-bottom: 0px solid #444444;
+}
+table.greenTable thead th {
+    font-size: 19px;
+    font-weight: bold;
+    text-align: left;
+    border-left: 1px solid #00131a;
+    border-bottom: 1px solid #00131a;
+}
+table.greenTable thead th:first-child {
+    border-left: none;
+}
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #c9cae8;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    align-content: center;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+    align-content: center;
+    width: 100%;
+}
+/* inner used on the Index page to keep the display narrow */
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+.innerTwo {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+.innerThree {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+.settingsInnerThree {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    height: 760px;
+    border-style: solid;
+    border-color: black;
+    background-color: #c6d7a8;
+    border-width: 2px;
+}

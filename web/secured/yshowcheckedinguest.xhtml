@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerThree">
+                <div class="content">
+                    <h:body class="content">
+                        <div class="content">
+                            <h:form class="myForm">
+                                <div class="centreLabels">
+                                    <h:outputLabel value="Guest Details" class="labelHeading">
+                                    </h:outputLabel>
+                                </div>
+                                <h:panelGrid columns="2"
+                                             columnClasses="firstBold, second"
+                                             class="content">
+                                    <h:outputLabel for="firstName" value="First Name:">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="firstName" value="#{manageBackpacker.firstName}">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="lastName" value="Last Name:">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="lastName" value="#{manageBackpacker.lastName}">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="idNumber" value="ID Number:">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="idNumber" value="#{manageBackpacker.idNumber}">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="country" value="Country:">
+                                    </h:outputLabel>
+                                    <h:outputLabel for="country" value="#{manageBackpacker.country}">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Room Name:">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{manageBackpacker.roomName}">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Bed Number:">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{manageBackpacker.bedNumber}">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Check-In Date:">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{manageBackpacker.checkInDate}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Check-Out Date:">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{manageBackpacker.checkOutDate}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Rate:">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{manageBackpacker.rate}">
+                                        <f:convertNumber type="currency"
+                                                         currencyCode="#{manageBackpacker.currency}"/>
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Discount:">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{manageBackpacker.discount}">
+                                        <f:convertNumber pattern="0.00%"
+                                                         maxFractionDigits="0"/>                    
+                                    </h:outputLabel>
+                                </h:panelGrid>
+                                <div class="centreLabels">
+                                    <h:outputLabel value="Extras" class="labelHeading">
+                                    </h:outputLabel>
+                                </div>
+                                <div class="centreLabels">
+                                    <h:dataTable value="#{manageBackpacker.guestExtrasObjectToDisplay}" var="e"
+                                                 styleClass="content"
+                                                 columnClasses="firstBold,second"
+                                                 style="border-top-color: transparent">
+                                        <h:column class="rightAligh">
+                                            <h:outputText value="#{e.itemName}"/>
+                                        </h:column>
+                                        <h:column class="leftAligh">
+                                            <h:outputText value="#{e.itemAmount}">
+                                                <f:convertNumber type="currency"
+                                                                 currencyCode="#{manageBackpacker.currency}"/>
+                                            </h:outputText>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:commandButton class="buttonsCheckInTwo"
+                                                     id="cancelToPendingCheckins2"
+                                                     action="#{navigationBean.cancelSessionGoToPendingCheckins()}" 
+                                                     value="Continue">
+                                        <f:ajax execute="@this"/>
+                                    </h:commandButton>
+                                    <h:commandButton class="buttonsCheckInTwo"
+                                                 id="cancelToPendingCheckins"
+                                                 action="#{navigationBean.cancelSessionGoToPendingCheckins()}" 
+                                                 value="Cancel">
+                                </h:commandButton>
+                                </div>
+                            </h:form>
+                        </div>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

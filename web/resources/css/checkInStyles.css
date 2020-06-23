@@ -1,0 +1,230 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-Nov-2018, 11:22:15
+    Author     : ComradeBaz
+*/
+.buttonsCheckIn {
+    width: 200px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: inherit;
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    position: relative;
+}
+.buttonsCheckIn:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.buttonsCheckInTwo {
+    width: 120px;
+    background-color: #426B69;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    color: white;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Annie Use Your Telescope';
+    display: inline-block;
+    font-size: inherit;
+    /* Change button when hover */
+    transition-duration: 0.4s;
+    /* Set buttons in the middle of the form */
+    position: relative;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.buttonsCheckInTwo:hover {
+    background-color: #2A4849;
+    color: white;
+}
+.rateTextBox {
+    width: 200px;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    border-style: solid;
+    color: black;  
+    text-align: left;
+    font-family: 'Annie Use Your Telescope';
+    padding-left: 3px;
+}
+.searchDatePicker {
+    width: 170px;
+    border-radius: 4px; /* Rounded edge */
+    border-width: 1px;
+    border-color: #00131a;
+    border-style: solid;
+    color: black;  
+    text-align: left;
+    font-family: 'Annie Use Your Telescope';
+    padding-left: 3px;
+}
+table, tr, th, td {
+    border: 1px solid black;
+    padding: 1px 5px;
+}
+table.payBillTable, tr, th, td {
+    border: 1px solid black;
+    padding: 1px 5px;
+    border-bottom: 0px;
+}
+.payBillTextBox {
+    font-weight: normal;
+    width: 140px;
+    border-radius: 0px;
+    border-style: solid;
+    border-color: #00131a;
+    border-width: 1px;
+    color: black;
+    margin: 0px;
+}
+.payBillButton {
+    font-weight: normal;
+    background-color: #426B69;
+    color: white !important;
+    width: 140px;
+    border-radius: 0px;
+    border-style: solid;
+    border-color: #00131a;
+    border-width: 1px;
+    color: black;
+    margin: 0px;
+}
+.payBillButton:hover {
+    background-color: #2A4849;
+}
+.payBillTextBoxCheckIn {
+    font-weight: normal;
+    border-radius: 0px;
+    border-style: solid;
+    border-color: #00131a;
+    border-width: 1px;
+    color: black;
+    margin: 0px;
+}
+.payBillButtonCheckIn {
+    font-weight: normal;
+    background-color: #426B69;
+    color: white !important;
+    border-radius: 0px;
+    border-style: solid;
+    border-color: #00131a;
+    border-width: 1px;
+    border-right: 2px;
+    color: black;
+    margin: 0px;
+    width: 40px;
+}
+.payBillButtonCheckIn:hover {
+    background-color: #2A4849;
+}
+td {
+    padding: 1px 5px;
+}
+table.checkInTable {
+    font-family: 'Annie Use Your Telescope';
+    border: 2px solid #00131a;
+    width: 95%;
+    text-align: left;
+    align-content: center;
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+table.checkInTable td, table.checkInTable th {
+    border: 1px solid #426B69;
+    padding: 5px;
+}
+table.checkInTable tbody td {
+    font-size: 22px;
+    padding: 5px;
+}
+table.checkInTable thead {
+    background: -moz-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: -webkit-linear-gradient(top, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    background: linear-gradient(to bottom, #5baf6b 0%, #3a9e4d 66%, #24943A 100%);
+    border-bottom: 0px solid #444444;
+}
+table.checkInTable thead th {
+    font-size: 19px;
+    text-align: left;
+    border-left: 1px solid #00131a;
+    border-bottom: 1px solid #00131a;
+}
+table.checkInTable thead th:first-child {
+    border-left: none;
+}
+.firstPendingCheckIn {
+    width: 215px;
+    padding: 25px;
+}
+.secondPendingCheckIn {
+    width: 215px;
+    padding: 25px;
+}
+.centreButtons {
+    text-align: center;
+    margin: 10px;
+}
+.centre {
+    text-align: center;
+    margin: 10px;
+}
+.centreLabels {
+    text-align: center;
+}
+.accordionControllers {
+    text-align: center;
+    transition: 0.4s;
+    cursor: pointer;
+}
+.accordionDivs {
+    text-align: center;
+
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.searchTable {
+    border-top: 0px;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-collapse: separate;
+    align-content: center;
+    background-color: #d2dfb9;
+
+    margin-left:auto; 
+    margin-right:auto;
+    font-family: 'Annie Use Your Telescope';
+    border: 2px solid #00131a;
+    width: 95%;
+    text-align: left;
+    align-content: center;
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.searchTable td, tr, th{
+    border: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
+}

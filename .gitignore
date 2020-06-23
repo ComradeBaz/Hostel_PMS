@@ -1,0 +1,9 @@
+/dist/
+/Booking-Engine
+/src/conf/**
+persistence - Copy.xml
+glassfish-resources.xml
+/build/
+/WebContent/WEB-INF/faces-config - Copy.xml
+/WebContent/WEB-INF/faces-config.xml
+/.settings/

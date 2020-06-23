@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <h:outputStylesheet library="css" name="tableWithLabels.css"/>
+        <h:outputStylesheet library="css" name="popUpSubtotal.css"/>
+        <h:outputScript library="js" name="manageGridView.js"/>
+        <h:outputScript library="js" name="clearTextBoxes.js" />
+        <h:outputScript library="js" name="manageDom.js" />
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerTwo">
+                <div class="content">
+                    <h:body onload="formatSaveCheckInPage()">
+                        <h:inputHidden value="#{manageBackpacker.theGuest.status}"
+                                       id="hiddenGuestStatus">
+                        </h:inputHidden>
+                        <h:form class="myForm"
+                                id="checkInGuestForm"
+                                style="display: none"
+                                prependId="false">
+                            <h:message id="messageOne"
+                                       for="checkInDate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageTwo"
+                                       for="checkOutDate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageThree"
+                                       for="roomName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageFour"
+                                       for="bedNumber"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageFive"
+                                       for="rate"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageSix"
+                                       for="currency"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageSeven"
+                                       for="guestNote"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageEight"
+                                       for="amountPaid"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageNine"
+                                       for="firstName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageTen"
+                                       for="lastName"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageEleven"
+                                       for="idNumber"
+                                       style="color:red">                                              
+                            </h:message>
+                            <h:message id="messageTwelve"
+                                       for="amountPaid"
+                                       style="color:red">                                              
+                            </h:message>
+                            <div>
+                                <h:commandButton class="gridHomeButton"
+                                                 action="#{navigationBean.redirectToIndex}"
+                                                 value="Home">
+                                    <f:ajax execute="@this"/>
+                                </h:commandButton>
+                                <h:commandButton value="The Bill"
+                                                 class="editGuestPageButtons"
+                                                 onclick="togglePopup('theBillPopup')">
+
+                                    <f:param name="rate" value="checkInGuestForm:rate"/>
+                                    <f:ajax
+                                        execute="@this" 
+                                        render="payBillForm:wrapper">
+                                    </f:ajax>
+                                </h:commandButton>
+                                <h:commandButton value="Notes"
+                                                 class="editGuestPageButtons"
+                                                 onclick="togglePopup('theNotesPopup')">
+                                    <f:ajax
+                                        event="click" execute="@this" render="guestNotesForm:wrapper">
+                                    </f:ajax>
+                                </h:commandButton>
+                                <h:commandButton onclick="togglePopup('myExtrasPopup')"
+                                                 value="Extras" 
+                                                 class="editGuestPageButtons">
+                                    <f:ajax execute="@this"/>
+                                </h:commandButton>
+                            </div>
+                            <h:panelGrid columns="2"
+                                         columnClasses="firstBold, second"
+                                         class="checkInTable">
+                                <h:outputLabel value="First Name"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:inputText id="firstName"
+                                             label="First Name"
+                                             value="#{manageBackpacker.firstName}"
+                                             required="true"
+                                             requiredMessage="First Name is required "
+                                             class="rateTextBox">
+                                    <f:validator validatorId="stringValidator"/>
+                                </h:inputText>
+                                <h:outputLabel value="Last Name"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:inputText id="lastName"
+                                             label="Last Name"
+                                             value="#{manageBackpacker.lastName}"
+                                             required="true"
+                                             requiredMessage="Last Name is required"
+                                             class="rateTextBox">
+                                    <f:validator validatorId="stringValidator"/>
+                                </h:inputText>
+                                <h:outputLabel value="ID Number"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:inputText id="idNumber"
+                                             label="ID Number"
+                                             value="#{manageBackpacker.idNumber}"
+                                             required="true"
+                                             requiredMessage="ID Number is required"
+                                             class="rateTextBox">
+                                    <f:validator validatorId="idValidator"/>
+                                </h:inputText>
+                                <h:outputLabel value="Country"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:inputText id="country"
+                                             label="Country"
+                                             value="#{manageBackpacker.country}"
+                                             required="true"
+                                             requiredMessage="Country is required"
+                                             class="rateTextBox">
+                                    <f:validator validatorId="wordValidator"/>
+                                </h:inputText>
+                                <h:outputLabel value="Check-In Date"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <b:dateTimePicker id="checkInDate"
+                                                  showIcon="true"
+                                                  format="DD-MM-YYYY"
+                                                  iconPosition="left"
+                                                  show-time="false"
+                                                  value="#{manageBackpacker.checkInDate}"
+                                                  required="true"
+                                                  requiredMessage="CheckIn Date is required "
+                                                  class="rateTextBox">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>                
+                                    <f:ajax
+                                        event="blur" execute="@this checkOutDate" render="bedNumber"
+                                        listener="#{manageBackpacker.changeListener}">
+                                    </f:ajax>
+                                </b:dateTimePicker>
+                                <h:outputLabel value="Check-Out Date"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <b:dateTimePicker id="checkOutDate"
+                                                  showIcon="true"
+                                                  format="DD-MM-YYYY"
+                                                  iconPosition="left"
+                                                  show-time="false"
+                                                  value="#{manageBackpacker.checkOutDate}"
+                                                  required="true"
+                                                  requiredMessage="CheckOut Date required "
+                                                  class="rateTextBox">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>                                    
+                                    <f:ajax
+                                        event="blur" execute="@this checkInDate" render="bedNumber"
+                                        listener="#{manageBackpacker.changeListener}">
+                                    </f:ajax>
+                                </b:dateTimePicker>
+                                <h:outputLabel  value="Room"
+                                                class="boldLabel">
+                                </h:outputLabel>
+                                <h:selectOneMenu id="roomName"     
+                                                 value="#{manageBackpacker.roomName}"
+                                                 class="buttonsCheckIn"
+                                                 required="true"
+                                                 requiredMessage="RoomName is required ">
+                                    <f:selectItem itemLabel="(Please select)" itemValue="">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.hostelRooms}">
+                                    </f:selectItems>
+                                    <f:ajax
+                                        event="change" execute="@this checkInDate checkOutDate" render="bedNumber rate :myForm:wrapper"
+                                        listener="#{manageBackpacker.changeListener}">
+                                    </f:ajax>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Bed Number"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:selectOneMenu id="bedNumber"                                   
+                                                 value="#{manageBackpacker.bedNumber}"
+                                                 class="buttonsCheckIn"
+                                                 required="true"
+                                                 requiredMessage="Bed Number is required">
+                                    <f:selectItems value="#{manageBackpacker.freeBeds}">
+                                    </f:selectItems>
+                                </h:selectOneMenu>      
+                                <h:outputLabel value="Currency">
+                                </h:outputLabel>
+                                <h:selectOneMenu id="currency"     
+                                                 value="#{manageBackpacker.currency}"
+                                                 class="buttonsCheckIn"
+                                                 required="true"
+                                                 requiredMessage="Please choose a currency ">
+                                    <f:selectItem itemLabel="(Currency)" itemValue="">
+                                    </f:selectItem>
+                                    <f:selectItems value="#{staticData.currencies}">
+                                    </f:selectItems> 
+                                    <f:ajax event="change" 
+                                            execute="@this" 
+                                            render="checkInGuestForm:rate :myForm:wrapper :extrasForm:wrapper payBillForm:wrapper"
+                                            listener="#{manageBackpacker.updateCurrency}">
+                                    </f:ajax>
+                                    <f:param name="currency" value="currency"/>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Rate"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:inputText id="rate"
+                                             label="Rate"
+                                             value="#{manageBackpacker.rate}"
+                                             required="true"
+                                             requiredMessage="Rate is required "
+                                             class="rateTextBox">
+                                    <f:convertNumber pattern="#0.00"/>
+                                    <f:validator validatorId="numberValidator"/>
+                                </h:inputText>   
+                                <h:outputLabel value="Discount %"
+                                               class="boldLabel">
+                                </h:outputLabel>
+                                <h:inputText id="discount"
+                                             label="Discount"
+                                             value="#{manageBackpacker.discount}"
+                                             class="rateTextBox">
+                                    <f:convertNumber type="percent"/>
+                                    <f:validator validatorId="numberValidator"/>
+                                </h:inputText>   
+                            </h:panelGrid>
+                            <div class="centreButtons">
+                                <h:commandButton action="#{manageBackpacker.updateReservation}" 
+                                                 id="save"
+                                                 value="Save" 
+                                                 class="buttonsCheckInTwo">
+                                    <param name="caller" value="Save"/>
+                                </h:commandButton>
+                                <h:commandButton action="#{manageBackpacker.checkInGuest}" 
+                                                 id="saveChanges"
+                                                 value="Save Changes" 
+                                                 class="buttonsCheckInTwo">
+                                </h:commandButton>
+                                <h:commandButton action="#{manageBackpacker.checkInGuest}" 
+                                                 id="checkInGuest"
+                                                 value="Check-In" 
+                                                 class="buttonsCheckInTwo">
+                                </h:commandButton>
+                                <h:commandButton action="#{navigationBean.toConfirmDelete}" 
+                                                 id="deleteGuest"
+                                                 value="Delete" 
+                                                 immediate="true"
+                                                 class="buttonsCheckInTwo">   
+                                </h:commandButton>
+                                <h:commandButton class="buttonsCheckInTwo"
+                                                 id="cancelToPendingCheckins"
+                                                 action="#{navigationBean.cancelSessionGoToPendingCheckins()}" 
+                                                 value="Cancel">
+                                    <f:ajax execute="@this"/>
+                                </h:commandButton>
+                                <h:commandButton class="buttonsCheckInTwo"
+                                                 id="cancelToDashboard"
+                                                 action="#{navigationBean.endSessionFromCheckOutGuest()}" 
+                                                 value="Cancel">
+                                    <f:ajax execute="@this"/>
+                                </h:commandButton>
+                            </div>
+                        </h:form>
+                        <div class="myBillPopupDiv"
+                             id="theBillPopup">
+                            <h:commandButton value="x"
+                                             id="closeBillPopUpButton"
+                                             class="close-button-top-right"
+                                             onclick="closeBillPopUp()">
+                            </h:commandButton>
+                            <h:form id="payBillForm"
+                                    class="myForm">
+                                <h:panelGroup id="wrapper">
+                                    <h:dataTable value="#{manageBackpacker.payBillObjects}" var="e"
+                                                 class="payBillTable"
+                                                 columnClasses="firstBoldPayBill,second">
+                                        <h:column class="rightAligh">
+                                            <h:outputText value="#{e.name}"/>
+
+                                        </h:column>
+                                        <h:column class="leftAligh">
+                                            <h:outputText value="#{e.value}">
+                                                <f:convertNumber pattern="#0.00"/> 
+                                            </h:outputText>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:panelGrid columns="2">
+                                        <h:inputText value="#{manageBackpacker.amountPaid}"
+                                                     id="amountPaid"
+                                                     class="payBillTextBox">
+                                            <f:convertNumber pattern="#0.00"/>  
+                                        </h:inputText>
+                                        <h:commandButton value="Pay"
+                                                         class="payBillButton"
+                                                         actionListener="#{manageBackpacker.updateAmountPaid}">
+                                            <f:ajax execute="@this amountPaid" 
+                                                    render="amountPaidLabel"/>
+                                        </h:commandButton>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </h:form>
+                        </div> 
+
+                        <div class="myExtrasPopupDiv"
+                             id="theNotesPopup">
+                            <h:commandButton value="x"
+                                             id="closeExtrasPopUpButton"
+                                             class="close-button-top-right"
+                                             onclick="closeNotesPopUp()">
+                            </h:commandButton>
+                            <h:form id="guestNotesForm"
+                                    class="myForm">
+                                <h:panelGroup id="wrapper">
+                                    <h:inputTextarea cols="30" 
+                                                     rows="5"
+                                                     id="guestNote"
+                                                     value="#{manageBackpacker.guestNote}">
+                                        <f:validator validatorId="wordValidator"/>
+                                    </h:inputTextarea>
+                                    <h:panelGrid columns="2">
+                                        <h:commandButton value="Save"
+                                                         class="payBillButton"
+                                                         onclick="togglePopup('theNotesPopup')"
+                                                         actionListener="#{manageBackpacker.saveNote()}">
+                                            <f:ajax execute="@this guestNote"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="Cancel"
+                                                         class="payBillButton"
+                                                         onclick="togglePopup('theNotesPopup')">
+                                            <f:ajax execute="@this"/>
+                                        </h:commandButton>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </h:form>
+                        </div> 
+                        <div class="myExtrasPopupDiv"
+                             id="myExtrasPopup">
+                            <h:commandButton value="x"
+                                             id="closeNotesPopUpButton"
+                                             class="close-button-top-right"
+                                             onclick="closeExtrasPopUp()">
+                            </h:commandButton>
+                            <h:form class="myForm"
+                                    id="extrasForm">
+                                <h:panelGroup id="wrapper">
+                                    <h:dataTable id="myExtrasPopup"
+                                                 value="#{manageBackpacker.guestExtrasObjectToDisplay}" 
+                                                 var="extras"
+                                                 styleClass="subTotalTable"
+                                                 columnClasses="second, extraTableFitContent, extraTableFitContent, fourthExtrasTable">
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Extra</f:facet>
+                                                #{extras.itemName}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Count</f:facet>
+                                            <h:outputLabel id="itemCountToUpdate"
+                                                           value="#{extras.itemCount}">
+                                            </h:outputLabel>                                                    
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Rate</f:facet>
+                                            <h:outputLabel value="#{extras.itemAmount}">
+                                                <f:convertNumber pattern="#0.00"/>
+                                            </h:outputLabel>                                                    
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <h:commandButton value="+"
+                                                             id="plus"
+                                                             class="gridGoButton"
+                                                             actionListener="#{manageBackpacker.updateExtrasItemCount}">
+                                                <f:param name="itemName" value="#{extras.itemName}"/>
+                                                <f:param name="itemAmount" value="#{extras.itemAmount}"/>
+                                                <f:param name="entryId" value="#{extras.extrasEntryId}"/>
+                                                <f:ajax execute="@this" render="itemCountToUpdate :myForm:wrapper"/>
+                                            </h:commandButton>                                        
+
+                                            <h:commandButton value="-"
+                                                             id="minus"
+                                                             class="gridGoButton"
+                                                             actionListener="#{manageBackpacker.updateExtrasItemCount}">
+                                                <f:param name="itemName" value="#{extras.itemName}"/>
+                                                <f:param name="itemAmount" value="#{extras.itemAmount}"/>
+                                                <f:param name="entryId" value="#{extras.extrasEntryId}"/>
+                                                <f:ajax execute="@this" render="itemCountToUpdate :myForm:wrapper"/>
+                                            </h:commandButton>                                        
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

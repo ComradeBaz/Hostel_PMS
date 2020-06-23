@@ -1,0 +1,93 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-Nov-2018, 21:45:55
+    Author     : ComradeBaz
+    Styles to add a subtotal popup to the checkout confirmation page
+*/
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+}
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 8px 0;
+    position: absolute;
+    top: 80px;
+    left: 300px;
+}
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+.popupsubcontent {
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 14px;
+    align-content: center;
+}
+table.subTotalTable {
+  font-family: 'Annie Use Your Telescope';
+  border: 2px solid #00131a;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+table.subTotalTable td, table.subTotalTable th {
+  border: 1px solid #426B69;
+  padding: 3px;
+}
+table.subTotalTable tbody td {
+  font-size: 16px;
+  padding: 3px;
+}
+table.subTotalTable thead th {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  border-left: 1px solid #00131a;
+  border-bottom: 2px solid #00131a;
+}
+.myExtrasPopupDiv {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    right: 30px;
+    bottom: 30px;
+}
+.myBillPopupDiv {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 30px;
+    bottom: 30px;
+}
+.myNotesPopupDiv {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    right: 30px;
+    top: 30px;
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}

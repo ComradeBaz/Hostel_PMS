@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <h:outputStylesheet library="css" name="gridviewtableloader.css"/>
+        <h:outputScript library="js" name="dateHelper.js" />
+        <h:outputScript library="js" name="getTableCellValues.js" />
+        <h:outputScript library="js" name="manageGridView.js" />
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerTwo">
+
+                <div style="display:none;"
+                     class="animate-table-bottom"
+                     id="theTable">
+                    <h:body class="content"
+                            onload="formatButtons()">       
+                        <h:form class="myFormGridTableHeading"
+                                id="myForm"
+                                prependId="false">
+                            <h:commandButton class="gridHomeButton"
+                                             action="#{navigationBean.redirectToIndex}"
+                                             value="Home">
+                                <f:ajax execute="@this"/>
+                            </h:commandButton>
+                            <h:commandButton value="Dashboard"
+                                             class="gridHomeButton"
+                                             action="#{navigationBean.goToDashboardCancelSession}">
+                            </h:commandButton>
+                            <h:commandButton value="This Month"
+                                             class="gridHomeButton"
+                                             id="thisMonthButton"
+                                             action="wthegrid"
+                                             onclick="setWhatMonth(this)"
+                                             actionListener="#{manageRoomGrid.setTheRoom}">
+                                <f:param name="currentRoom" value="#{manageRoomGrid.currentRoomName}"/>
+                                <f:param name="forPeriod" value="this_month"/>
+                            </h:commandButton>
+                            <h:commandButton value="Next Month"
+                                             class="gridHomeButton"
+                                             id="nextMonthButton"
+                                             action="wthegrid"
+                                             onclick="setWhatMonth(this)"
+                                             actionListener="#{manageRoomGrid.setTheRoom}">
+                                <f:param name="currentRoom" value="#{manageRoomGrid.currentRoomName}"/>
+                                <f:param name="forPeriod" value="next_month"/>
+                            </h:commandButton>
+                            <h:selectOneMenu id="roomName"     
+                                             value="#{manageRoomGrid.currentRoomName}"
+                                             class="buttonsGridViewTable">
+                                <f:selectItem itemLabel="(Please select)" itemValue=""></f:selectItem>
+                                <f:selectItems value="#{staticData.hostelRooms}"></f:selectItems>
+                            </h:selectOneMenu>
+                            <div class="forHeadingWidth">
+                                <div class="myGridTableHeading">
+                                    <th>
+                                        <h:outputLabel value="#{manageRoomGrid.currentRoomName} - #{manageRoomGrid.dateForHeading}">
+                                        </h:outputLabel>
+                                    </th>
+                                </div>
+                                <h:panelGroup id="renderTable">
+                                    <table id="tblSqlResult"
+                                           class="gridViewTable">
+                                        <thead>
+                                            <tr>
+                                                <!-- sql.headers is a List of Strings -->
+                                                <ui:repeat value="#{manageRoomGrid.daysOfMonth}" var="h">
+                                                    <th image="#{resource['images:roomIcon25px.png']}">
+                                                        #{h}
+                                                    </th>
+                                                </ui:repeat>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{manageRoomGrid.occupants}" var="row">
+                                                <tr>
+                                                    <ui:repeat value="#{row}" var="cell">
+                                                        <td id="tableCell"
+                                                            class="tableCellClass">
+                                                            <h:commandButton value="#{cell.intValue()}" 
+                                                                             id="myEditButton"
+                                                                             class="gridButtonsButtons"
+                                                                             onclick="toggleForm(this)"
+                                                                             image="#{resource['images:roomIcon25px.png']}"
+                                                                             action="#{manageRoomGrid.setGuestToDisplay}">    
+                                                                <f:param name="cellValue" value="#{cell.intValue()}"/>
+                                                                <f:ajax execute="@this" render=":form:wrapper :updatedGuest:confirmation"/>
+                                                            </h:commandButton>
+                                                            #{cell}
+                                                        </td>
+                                                    </ui:repeat>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
+                            </div>
+                        </h:form>
+                        <div class="myFormPopUp" 
+                             id="guestSummaryForm">
+                            <h:form id="form">
+                                <h:panelGroup id="wrapper">
+                                    <h:dataTable id="guestSummaryDetails"
+                                                 value="#{manageRoomGrid.guestToDisplay}" 
+                                                 var="theGuest" 
+                                                 styleClass="gridViewGuestPopUp"
+                                                 columnClasses="firstpopup,firstpopup, firstpopup, firstpopup">
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">Name</f:facet>
+
+                                            #{theGuest.firstName}
+                                            <h:commandButton value="" 
+                                                             id="myEditButton"
+                                                             class="myGridEditButtons"
+                                                             action="xsavecheckin"
+                                                             actionListener="#{manageBackpacker.setTheGuest}"
+                                                             image="#{resource['images:editGuestButtonGridTableNormal.png']}">
+                                                <f:param name="cellValue" value="#{theGuest.reservationId}"/>
+                                                <f:param name="reservationId" value="#{theGuest.reservationId}"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">Last Name</f:facet>
+                                                #{theGuest.lastName}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">Bed Number</f:facet>
+                                                #{theGuest.bedNumber}
+                                            <h:commandButton value="+"
+                                                             class="extendCheckoutButton"
+                                                             id="upOneBedNumber"
+                                                             onclick="moveBed(this)"
+                                                             actionListener="#{manageRoomGrid.moveBedInSameRoom}">   
+                                                <f:ajax execute="@this" 
+                                                        render=":updatedGuest:confirmation"/>
+                                            </h:commandButton>
+                                            <h:commandButton value="-"
+                                                             class="extendCheckoutButton"
+                                                             id="downOneBedNumber"
+                                                             onclick="moveBed(this)"
+                                                             actionListener="#{manageRoomGrid.moveBedInSameRoom}">
+                                                <f:ajax execute="@this" 
+                                                        render=":updatedGuest:confirmation"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">CheckOut</f:facet>
+                                            <h:outputLabel id="guestCheckOut"
+                                                           value="#{theGuest.checkOutDate}">
+                                                <f:convertDateTime pattern="dd-MM-yy"/>  
+                                            </h:outputLabel>
+                                            <h:commandButton value="+"
+                                                             class="extendCheckoutButton"
+                                                             id="extendCheckOutDateByOne"
+                                                             onclick="toggleUpdatedGuestForm(this)"
+                                                             immediate="true"
+                                                             action="#{manageRoomGrid.extendGuestByOneNight}">  
+                                                <f:param name="reservationId" value="#{theGuest.reservationId}"/>
+                                                <f:ajax execute="@this" render=":updatedGuest:confirmation"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+                        <div id="updateGuestForm"
+                             class="myFormPopUp">
+                            <h:form id="updatedGuest">         
+                                <h:panelGroup id="confirmation">
+                                    <h:dataTable id="guestDetails"
+                                                 value="#{manageRoomGrid.guestToDisplay}" 
+                                                 var="theGuest" 
+                                                 styleClass="gridViewGuestPopUp"
+                                                 columnClasses="firstpopup,firstpopup, firstpopup, firstpopup">
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">Name</f:facet>
+                                                #{theGuest.firstName}
+                                            <h:commandButton value="" 
+                                                             id="myEditButton"
+                                                             class="myGridEditButtons"
+                                                             action="xsavecheckin"
+                                                             actionListener="#{manageBackpacker.setTheGuest}"
+                                                             image="#{resource['images:editGuestButtonGridTableNormal.png']}">
+                                                <f:param name="cellValue" value="#{theGuest.reservationId}"/>
+                                                <f:param name="reservationId" value="#{theGuest.reservationId}"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">Last Name</f:facet>
+                                                #{theGuest.lastName}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">Bed Number</f:facet>
+                                                #{theGuest.bedNumber}
+                                            <h:commandButton value="+"
+                                                             class="extendCheckoutButton"
+                                                             id="upOneBedNumber"
+                                                             onclick="moveBed(this)"
+                                                             actionListener="#{manageRoomGrid.moveBedInSameRoom}">   
+                                                <f:ajax execute="@this" 
+                                                        render=":form:wrapper"/>
+                                            </h:commandButton>
+                                            <h:commandButton value="-"
+                                                             class="extendCheckoutButton"
+                                                             id="downOneBedNumber"
+                                                             onclick="moveBed(this)"
+                                                             actionListener="#{manageRoomGrid.moveBedInSameRoom}">
+                                                <f:ajax execute="@this" 
+                                                        render=":form:wrapper"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header" class="facets">CheckOut</f:facet>
+                                            <h:outputLabel id="guestChecksOut"
+                                                           value="#{theGuest.checkOutDate}">
+                                                <f:convertDateTime pattern="dd-MM-yy"/>  
+                                            </h:outputLabel>
+                                            <h:commandButton value="+"
+                                                             class="extendCheckoutButton"
+                                                             id="extendCheckOutDateByOne"
+                                                             immediate="true"
+                                                             onclick="toggleUpdatedGuestForm(this)"
+                                                             action="#{manageRoomGrid.extendGuestByOneNight}">  
+                                                <f:param name="reservationId" value="#{theGuest.reservationId}"/>
+                                                <f:ajax execute="@this" render=":form:wrapper"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:panelGroup>
+                                <h:inputHidden id="whatMonthIsIt"
+                                               value="#{manageRoomGrid.whatMonth}">
+                                </h:inputHidden>
+                            </h:form>
+                        </div>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
+
+

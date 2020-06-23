@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputScript library="js" name="manageGridView.js"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerTwo">
+                <div class="content">
+                    <body class="content">
+                        <div id="checkingOutTodayForm">
+                            <h:form class="myForm"
+                                    id="checkOutsForm">
+                                <h:commandButton class="gridHomeButton"
+                                                 action="#{navigationBean.redirectToIndex}"
+                                                 value="Home">
+                                </h:commandButton>
+                                <h:commandButton value="Dashboard"
+                                                 class="gridHomeButton"
+                                                 action="wgridview">
+                                </h:commandButton>
+                                <h:panelGroup id="rapper">
+                                    <h:dataTable value="#{manageRoomGrid.guestsCheckingOutToday}" 
+                                                 id="checkingOutTodayTable"
+                                                 var="checkedInGuests"
+                                                 styleClass="greenTable"
+                                                 columnClasses="first,second, third, fourth, first, second, third, fourth, first, second">
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">First Name</f:facet>
+                                                #{checkedInGuests.firstName}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Last Name</f:facet>
+                                                #{checkedInGuests.lastName}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">ID Number</f:facet>
+                                                #{checkedInGuests.idNumber}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Country</f:facet>
+                                                #{checkedInGuests.country}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Room</f:facet>
+                                                #{checkedInGuests.roomName}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">Bed Number</f:facet>
+                                                #{checkedInGuests.bedNumber}
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header">CheckIn Date</f:facet>
+                                            <h:outputText value="#{checkedInGuests.checkInDate}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column class="rightAligh">                 
+                                            <f:facet name="header">CheckOut Date</f:facet>
+                                            <h:outputText id="checkOutDate"
+                                                          value="#{checkedInGuests.checkOutDate}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>  
+                                            <h:commandButton value="+"
+                                                             class="extendCheckoutButton"
+                                                             id="extendCheckOutDateByOne"
+                                                             action="#{manageRoomGrid.extendGuestByOneNight}">   
+                                                <f:param name="reservationId" value="#{checkedInGuests.reservationId}"/>
+                                                <f:ajax execute="@this" render=":checkOutsForm:rapper"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                        <h:column class="rightAligh">
+                                            <f:facet name="header"></f:facet>
+                                            <h:commandButton value="Check-Out"
+                                                             action="zshowguest"
+                                                             actionListener="#{manageBackpacker.setTheGuest}"
+                                                             class="gridHomeButton">
+                                                <f:param name="reservationId" value="#{checkedInGuests.reservationId}"/>
+                                            </h:commandButton>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+                    </body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

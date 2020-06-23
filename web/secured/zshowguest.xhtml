@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <h:outputStylesheet library="css" name="popUpSubtotal.css"/>
+        <h:outputScript library="js" name="manageRetainDepositButton.js"/>
+        <h:outputScript library="js" name="manageGridView.js"/>
+        <h:outputScript library="js" name="manageDom.js"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middleShowCheckedOutGuest">
+            <div class="innerThree">
+                <div class="content">
+                    <h:body class="content"
+                            onload="formatTable()">
+                        <h:form class="myForm"
+                                id="showGuestForm">
+                            <div class="centreLabels">
+                                <div class="popup">
+                                    <div class="popuptext"
+                                         id="myPopup">
+                                    </div> 
+                                </div>
+                                <h:outputLabel value="Guest Details" class="labelHeading">
+                                </h:outputLabel>
+                            </div>
+                            <h:panelGrid columns="2"
+                                         id="guestCheckOutDetails"
+                                         columnClasses="firstBold, second"
+                                         class="content">
+                                <h:outputLabel value="First Name:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.firstName}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Last Name:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.lastName}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Room Name:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.roomName}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Bed Number:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.bedNumber}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Check-In Date:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.checkInDate}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                </h:outputLabel>
+                                <h:outputLabel value="Check-Out Date:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.checkOutDate}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                </h:outputLabel>
+                                <h:outputLabel value="Rate:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.rate}">
+                                    <f:convertNumber type="currency"
+                                                     currencyCode="#{manageBackpacker.currency}"/>
+                                </h:outputLabel>
+                                <h:outputLabel value="Discount:">
+                                </h:outputLabel>
+                                <h:outputLabel value="#{manageBackpacker.discount}">
+                                    <f:convertNumber type="percent"/>                    
+                                </h:outputLabel>
+                            </h:panelGrid>
+                            <div class="accordionControllers"
+                                 id="otherReservationsHeading">
+                                <h:button value="Other Booking" 
+                                          id="otherReservationsHeadingButton"
+                                          class="buttonsCheckInTwo"
+                                          onclick="playAccordion(this)">
+                                    <f:ajax event="click" execute="@this"/>
+                                </h:button>
+                            </div>
+                            <div id="showGuestOtherReservations"
+                                 class="accordionDivs">
+                                <h:dataTable id="otherReservations"
+                                             value="#{manageBackpacker.movedBedReservations}" 
+                                             var="otherReservation"
+                                             class="subtotalContent"
+                                             columnClasses="first,second, third">
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Room</f:facet>
+                                            #{otherReservation.oldRoom}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Nights</f:facet>
+                                            #{otherReservation.oldNoOfDays}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Rate</f:facet>
+                                        <h:outputLabel value="#{otherReservation.oldRate}">
+                                            <f:convertNumber type="currency"
+                                                             currencyCode="#{manageBackpacker.currency}"/>
+                                        </h:outputLabel>                                                    
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                            <div class="accordionControllers"
+                                 id="depositHeading">
+                                <h:button value="Deposits" 
+                                          id="depositHeadingButton"
+                                          class="buttonsCheckInTwo"
+                                          onclick="playAccordion(this)">
+                                    <f:ajax event="click" execute="@this" render="myForm"/>
+                                </h:button>
+                            </div>
+                            <div class="accordionDivs"
+                                 id="showGuestDeposits">
+                                <h:dataTable value="#{manageBackpacker.guestExtrasObject_Deposit}" var="e"
+                                             styleClass="content"
+                                             id="depositsTable"
+                                             columnClasses="firstBold,second">
+                                    <h:column class="rightAligh">
+                                        <h:outputText value="#{e.itemName}"/>
+                                        x #{e.itemCount}
+                                    </h:column>
+                                    <h:column class="leftAligh">
+                                        <h:outputText value="#{e.itemAmount}">
+                                            <f:convertNumber type="currency"
+                                                             currencyCode="#{manageBackpacker.currency}"/>
+                                        </h:outputText>
+                                        <h:commandButton value="Keep" 
+                                                         actionListener="#{manageBackpacker.retainDeposit}"
+                                                         class="bankDepositButton"
+                                                         onclick="updateRetainDepositButtonAndCell(this)">
+                                            <f:param name="guestId" value="#{e.guestId}"/>
+                                            <f:param name="reservationId" value="#{e.reservationId}"/>
+                                            <f:param name="amountPaid" value="#{e.itemAmount}"/>
+                                            <f:ajax execute="@this" render="showGuestForm:amountPaidByGuest showGuestForm:theBalance"/>
+                                        </h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                            <div class="accordionControllers"
+                                 id="extrasHeading">
+                                <h:button value="Extras" 
+                                          id="extrasHeadingButton"
+                                          class="buttonsCheckInTwo"
+                                          onclick="playAccordion(this)">
+                                    <f:ajax event="click" execute="@this"/>
+                                </h:button>
+                            </div>
+                            <div id="showGuestExtras"
+                                 class="accordionDivs">
+                                <h:dataTable value="#{manageBackpacker.guestExtrasObject_NonDeposit}" var="f"
+                                             id="extrasTable"
+                                             styleClass="content"
+                                             columnClasses="firstBold,second">
+                                    <h:column class="rightAligh">
+                                        <h:outputText value="#{f.itemName}"/>
+                                        x #{f.itemCount}
+                                    </h:column>
+                                    <h:column class="leftAligh">
+                                        <h:outputText value="#{f.itemAmount}">
+                                            <f:convertNumber type="currency"
+                                                             currencyCode="#{manageBackpacker.currency}"/>
+                                        </h:outputText>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                            <div class="accordionControllers"
+                                 id="notesHeading">
+                                <h:button value="Notes" 
+                                          id="notesHeadingButton"
+                                          class="buttonsCheckInTwo"
+                                          onclick="playAccordion(this)">
+                                    <f:ajax event="click" execute="@this"/>
+                                </h:button>
+                            </div>
+                            <div class="accordionDivs"
+                                 id="noteTextArea">
+                                <h:inputTextarea cols="30" 
+                                                 rows="5"
+                                                 id="guestNote"
+                                                 value="#{manageBackpacker.guestNote}">
+                                </h:inputTextarea>
+                            </div>
+                            <div class="centreLabels"
+                                 id="guestPaysDiv">
+                                <h:outputLabel value="Guest Pays" 
+                                               id="guestPaysLabel"
+                                               class="labelHeading">
+                                </h:outputLabel>
+                                <h:panelGrid columns="2"
+                                             id="guestPaysPanel"
+                                             columnClasses="firstBold, second"
+                                             class="content">
+                                    <h:outputLabel value="Total:"/>
+                                    <h:outputLabel value="#{manageBackpacker.totalAmount}">
+                                        <f:convertNumber type="currency"
+                                                         currencyCode="#{manageBackpacker.currency}"/>
+                                    </h:outputLabel>
+                                    <h:outputLabel value="Paid:"/>
+                                    <h:outputLabel id="amountPaidByGuest"
+                                                   value="#{manageBackpacker.amountPaid}">
+                                        <f:convertNumber type="currency"
+                                                         currencyCode="#{manageBackpacker.currency}"/>
+                                    </h:outputLabel>
+                                    <h:outputLabel value ="Balance:"/>
+                                    <h:outputLabel value="#{manageBackpacker.theBalance}"
+                                                   id="theBalance">
+                                        <f:convertNumber type="currency"
+                                                         currencyCode="#{manageBackpacker.currency}"/>
+                                    </h:outputLabel>
+                                </h:panelGrid>
+                            </div>
+                            <div class="centreButtons">
+                                <h:commandButton value="Confirm" 
+                                                 action="#{manageBackpacker.checkOutGuest()}"
+                                                 class="buttonsCheckInTwo">
+                                </h:commandButton>
+                                <h:commandButton class="buttonsCheckInTwo"
+                                                 action="#{navigationBean.endSessionFromCheckOutGuest}" 
+                                                 value="Cancel">
+                                    <f:ajax execute="@this"/>
+                                </h:commandButton>
+                            </div>
+                        </h:form>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

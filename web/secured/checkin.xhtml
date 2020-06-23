@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerIndex">
+                <div class="content">
+                    <h:body class="content"
+                          onload="waitABit()">
+                        <div>
+                            <h:form class="myForm"
+                                    id="thePage">
+                                <p><h:commandButton class="buttons"
+                                                    value="Pending Check-Ins" 
+                                                    action="ycheckinguest"/></p>
+                                <p><h:commandButton class="buttons"
+                                                    value="Enter Guest Details" 
+                                                    action="xsaveguest"/></p>
+                                <p><h:commandButton class="buttons"
+                                                    value="Home" 
+                                                    action="#{navigationBean.toIndex}"/></p>
+                            </h:form>
+                        </div>
+                        <script>
+                            function waitABit() {
+                                var myVar;
+                                myVar = setTimeout(showPage, 400);
+                            }
+                            function showPage() {
+
+                                document.getElementById("thePage").style.display = "block";
+                            }
+                        </script>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <h:outputScript library="js" name="manageGridView.js"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerTwo">
+                <div class="content">
+                    <h:body>
+                        <h:messages></h:messages>
+                        <h:form class="myForm"
+                                id="searchForm">
+                            <h:commandButton class="gridHomeButton"
+                                             action="#{navigationBean.toIndex}"
+                                             value="Home">
+                                <f:ajax execute="@this"/>
+                            </h:commandButton>
+                            <div>
+                                <h:panelGrid columns="8"
+                                             columnClasses="firstSearch"
+                                             class="searchTable">
+                                    <h:column>
+                                        <h:outputLabel value="Check-In"
+                                                       class="searchLabel"/>
+                                    </h:column>
+                                    <h:column>
+                                        <b:dateTimePicker id="startDate"
+                                                          showIcon="true"
+                                                          format="DD-MM-YYYY"
+                                                          iconPosition="left"
+                                                          show-time="false"
+                                                          value="#{search.startDate}"
+                                                          class="searchDatePicker">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </b:dateTimePicker>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputLabel value="Check-Out"
+                                                       class="searchLabel"/>
+                                    </h:column>
+                                    <h:column>
+                                        <b:dateTimePicker id="endDate"
+                                                          showIcon="true"
+                                                          format="DD-MM-YYYY"
+                                                          iconPosition="left"
+                                                          show-time="false"
+                                                          value="#{search.endDate}"
+                                                          class="searchDatePicker">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </b:dateTimePicker>
+                                    </h:column>
+                                    <h:column>
+                                        <h:selectOneMenu value = "#{search.guestStatus}"
+                                                         id="guestStatus"
+                                                         class="searchButton"> 
+                                            <f:selectItem itemLabel="(Guest Status)" itemValue=""></f:selectItem>
+                                            <f:selectItem itemLabel="All" itemValue="any"></f:selectItem>
+                                            <f:selectItems value="#{search.allGuestStatus}"></f:selectItems>
+
+                                        </h:selectOneMenu> 
+                                    </h:column>
+                                    <h:column>
+                                        <h:selectOneMenu value = "#{search.roomName}"
+                                                         class="searchButton"> 
+                                            <f:selectItem itemLabel="(RoomName)" itemValue=""></f:selectItem>
+                                            <f:selectItem itemLabel="All" itemValue="any"></f:selectItem>
+                                            <f:selectItems value="#{search.allHostelRoomNames}"></f:selectItems>
+                                        </h:selectOneMenu> 
+                                    </h:column>
+                                    <h:column>
+                                        <h:selectOneMenu value = "#{search.country}"
+                                                         class="searchButton"> 
+                                            <f:selectItem itemLabel="(Country)" itemValue=""></f:selectItem>
+                                            <f:selectItem itemLabel="All" itemValue="any"></f:selectItem>
+                                            <f:selectItems value="#{search.allCountries}"></f:selectItems>
+                                        </h:selectOneMenu> 
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton value="Search"
+                                                         class="searchButton"
+                                                         action="#{search.doSearch()}"
+                                                         id="searchButton">
+                                            <f:param name="status" value="guestStatus"/>
+                                        </h:commandButton>
+                                    </h:column>
+                                </h:panelGrid>
+                            </div>
+                        </h:form>
+                        <h:form id="theResults"
+                                class="myForm">
+                            <h:panelGroup id="wrapper">
+                                <h:dataTable value="#{search.results}" var="result"
+                                             class="checkInTable">
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">First Name</f:facet>
+                                            #{result.firstName}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Last Name</f:facet>
+                                            #{result.lastName}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">ID Number</f:facet>
+                                            #{result.idNumber}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Country</f:facet>
+                                            #{result.country}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Room</f:facet>
+                                            #{result.roomName}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">Bed Number</f:facet>
+                                            #{result.bedNumber}
+                                    </h:column>
+                                    <h:column class="rightAligh">
+                                        <f:facet name="header">CheckIn Date</f:facet>
+                                        <h:outputText value="#{result.checkInDate}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column class="rightAligh">                 
+                                        <f:facet name="header">CheckOut Date</f:facet>
+                                        <h:outputText value="#{result.checkOutDate}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </h:outputText>     
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                        </h:form>
+                    </h:body>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

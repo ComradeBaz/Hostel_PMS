@@ -1,0 +1,138 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30-Oct-2018, 19:41:46
+    Author     : ComradeBaz
+*/
+@import url('https://fonts.googleapis.com/css?family=Annie Use Your Telescope');
+.content {
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+
+.settingsContent {
+    max-width: 50%;
+    float: left;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+}
+.settingsContentRight {
+    max-width: 50%;
+    float: left;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    align-content: center;
+    margin-left: 15px;
+}
+
+.settingsButtons {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 2px;
+}
+
+.settingsHomeButton {
+    background-color: #426B69;
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: #ffffff;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+.buttonsGridViewTable {
+    width: 150px;
+    background-color: #426B69;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Annie Use Your Telescope';
+    font-size: inherit;
+}
+
+.centreLabels {
+    text-align: center;
+}
+
+.labels { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 190px;
+}
+.adminTextBoxes { 
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 146px;
+}
+.adminLabels {
+    font-family: 'Annie Use Your Telescope';
+    font-size: 22px;
+    width: 100%;
+}
+
+.mySettingsForm {
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: #d1dfb9;
+    padding: 20px;
+    align-content: center;
+    border-collapse: collapse;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.newRoomHeader {
+    margin-left: 20px;
+    align-content: center;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #c9cae8;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    align-content: center;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+    align-content: center;
+    width: 100%;
+}
+
+.settingsInnerThree {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    height: 760px;
+    border-style: solid;
+    border-color: black;
+    background-color: #c6d7a8;
+    border-width: 2px;
+}

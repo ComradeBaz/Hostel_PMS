@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="checkInStyles.css"/>
+        <title>Hostel PMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <div class="outer">
+        <div class="middle">
+            <div class="innerTwo">
+                <h:body class="content"
+                        onload="waitABit()">
+                    <div id="thePage"
+                         style="display:none;">
+                        <h:form class="myForm">
+                            <h:commandButton class="gridHomeButton"
+                                             action="#{navigationBean.redirectToIndex()}" 
+                                             value="Home">
+                                <f:ajax execute="@this"/>
+                            </h:commandButton>
+                            <h:dataTable value="#{dynamicData.getSavedGuestsCheckedIn()}" 
+                                         var="checkedInGuests"
+                                         styleClass="greenTable"
+                                         columnClasses="first,second, third, fourth, first, second, third, fourth, first, second">
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">First Name</f:facet>
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">Edit</span>
+                                        <h:commandButton value="" 
+                                                         id="myEditButton"
+                                                         class="myEditButtons"
+                                                         action="xsavecheckin"
+                                                         actionListener="#{manageBackpacker.setTheGuest}"
+                                                         image="#{resource['images:editGuestButtonNormal.png']}">
+                                            <f:param name="currentGuest" value="#{checkedInGuests.guestId}"/>
+                                            <f:param name="reservationId" value="#{checkedInGuests.reservationId}"/>
+                                            <f:param name="currentBedNumber" value="#{checkedInGuests.bedNumber}"/>
+                                        </h:commandButton>
+                                        #{checkedInGuests.firstName}
+                                    </div>
+                                </h:column>
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">Last Name</f:facet>
+                                        #{checkedInGuests.lastName}
+                                </h:column>
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">ID Number</f:facet>
+                                        #{checkedInGuests.idNumber}
+                                </h:column>
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">Country</f:facet>
+                                        #{checkedInGuests.country}
+                                </h:column>
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">Room</f:facet>
+                                        #{checkedInGuests.roomName}
+                                </h:column>
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">Bed Number</f:facet>
+                                        #{checkedInGuests.bedNumber}
+                                </h:column>
+                                <h:column class="rightAligh">
+                                    <f:facet name="header">CheckIn Date</f:facet>
+                                    <h:outputText value="#{checkedInGuests.checkInDate}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column class="rightAligh">                 
+                                    <f:facet name="header">CheckOut Date</f:facet>
+                                    <h:outputText value="#{checkedInGuests.checkOutDate}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>     
+                                </h:column>                                
+                                <h:column class="rightAligh">
+                                    <f:facet name="header"></f:facet>
+                                    <h:commandButton id="cOutButton"
+                                                     value="Check-Out"
+                                                     action="zshowguest"
+                                                     actionListener="#{manageBackpacker.setTheGuest}"
+                                                     class="gridHomeButton">
+                                        <f:param name="currentGuest" value="#{checkedInGuests.guestId}"/>
+                                        <f:param name="reservationId" value="#{checkedInGuests.reservationId}"/>
+                                    </h:commandButton>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <script>
+                        function waitABit() {
+                            var myVar;
+                            myVar = setTimeout(showPage, 200);
+                        }
+                        function showPage() {
+
+                            document.getElementById("thePage").style.display = "block";
+                        }
+                    </script>
+                </h:body>
+            </div>
+        </div>
+    </div>
+</html>
